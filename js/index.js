@@ -1,4 +1,5 @@
 var config = {
+//    host: "http://localhost/GooKHPIServer/public/index.php"
     host: "http://192.168.0.73/GooKHPIServer/public/index.php"
 };
 
@@ -61,16 +62,17 @@ function processLogin(response) {
 
 
 function processGetListRequests(response) {
+    var html = "";
     for (var key in response) {
-        var isFinished = response[key].is_finished ? "Да" : "Нет";
-        var html = "<li>\n\
+        var isFinished = parseInt(response[key].is_finished) ? "Да" : "Нет";
+        html += "<li>\n\
                     <a href=\"\">\n\
                     <h3 id=\"title\">"+response[key].request+"</h3>\n\
                     <p><b>Завершен:</b> <span id=\"isFinished\">"+isFinished+".</span></p>\n\
                     <p id=\"dateCreate\">"+response[key].created_at+"</p>\n\
                     </a></li>";
-        $("#requestList").append(html);
     }
+    $("#requestList").html(html);
     $("#requestList").listview("refresh");
 }
 
