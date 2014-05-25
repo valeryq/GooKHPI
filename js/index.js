@@ -1,11 +1,12 @@
 var config = {
     host: "localhost/GooKHPIServer/public/index.php"
-}
+};
+
 var isAuth = false;
 var user = {};
 
 $(document).ready(function() {
-    setInterval(checkIsAuth, 30000);
+    
 });
 
 
