@@ -1,76 +1,44 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=2, maximum-scale=2, minimum-scale=2, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.min.css" />
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile.min.js"></script>
-        <script type="text/javascript" src="js/jquery.fasClick.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <title>GooХПИ</title>
+        <title>PhoneGap Ajax Sample</title>
+        <script type="text/javascript">
+            function appReady() {
+                var ajax = new XMLHttpRequest();
+                ajax.open("GET", "http://search.twitter.com/search.json?q=bacon", true);
+                ajax.send();
+
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 4 && (ajax.status == 200 || ajax.status == 0)) {
+                        eval('var data = ' + ajax.responseText + ';');
+                        var theResults = data.results;
+                        var theHTML = '';
+                        for (var i = 0; i < theResults.length; i++) {
+                            theHTML += ['<div class="tweet"',
+                                '<div class="avatar"> <img src=' + theResults[i].profile_image_url + ' /></div>',
+                                '<div class="tweet_content">',
+                                '<h2>' + theResults[i].from_user + '</h2>',
+                                '<p>' + theResults[i].text + '</p>',
+                                '</div>',
+                                '</div>'].join('');
+                        }
+                        document.getElementById('main').innerHTML = theHTML;
+                    }
+                }
+            }
+            document.addEventListener("deviceready", appReady, false);
+
+        </script>
+
+        <style type="text/css">
+            .tweet {padding-bottom:5px;}
+            .avatar {float: left; height: 48px; width: 48px;}
+            .tweet_content {margin-left: 60px; min-height: 48px;}
+        </style>
     </head>
     <body>
-        <div data-role="page" id="main_page" data-theme="a">
-            <div data-role="header">
-                <h1 style="text-align:left;margin-left:15px;">GooХПИ</h1>
-                <div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
-                    <a style="padding:15px;" data-rel="dialog" data-iconpos="notext" data-icon="gear" data-role="button" href="#dialog1"></a>
-                    <a style="padding:15px;" data-rel="dialog" data-iconpos="notext" data-icon="bars" data-role="button" href="#dialog2"></a>
-                </div>
-            </div>
-            <div data-role="content">
-                <ul data-role="listview" data-inset="true" data-theme="a">
-                    <li><a href="#twitter_page">Twitter example</a></li>
-                    <li><a href="#map_page">Map example</a></li>
-                    <li><a href="#about">About</a></li>
-                </ul>
-                <div id="data_test"></div>
-            </div>
-            <div data-role="footer">
-                Developed by Rebrov Andrey, Samara 2010
-            </div>
-        </div>		
-        <div data-role="page" id="twitter_page" data-theme="a">
-            <div data-role="header" >
-                <h1>Simple twitter example</h1>
-            </div>
-            <div data-role="content" >	
-                <div id="twi_list"></div>
-            </div>
-            <div data-role="footer">				
-                Developed by Rebrov Andrey, Samara 2010
-            </div>
-        </div>
-        <div data-role="page" id="map_page" data-theme="a">
-            <div data-role="header" >
-                <h1>Map example</h1>
-            </div>
-            <div data-role="content" >	
-                <div id="map_canvas"></div>
-            </div>
-            <div data-role="footer">				
-                Developed by Rebrov Andrey, Samara 2010
-            </div>
-        </div>
-        <div data-role="page" id="about" data-theme="a">
-            <div data-role="header" >
-                <h1>About me</h1>
-            </div>
-            <div data-role="content" >	
-                <h1>Rebrov Andrey</h1>
-                <div>Hi, my name is Rebrov Andrey. My contacts are below.</div>
-                <ul data-role="listview" data-inset="true" data-theme="c" role="listbox">
-                    <li data-role="list-divider" role="heading" tabindex="0" class="ui-li ui-li-divider ui-bar-b ui-corner-top"></li>
-                    <li><a href="mailto:andrebrov@gmail.com" class="ui-link-inherit">EMail me</a></li>
-                    <li><a href="tel:+79178170781" class="ui-link-inherit">Call me</a></li>
-                    <li data-role="list-divider" role="heading" tabindex="1" class="ui-li ui-li-divider ui-bar-b ui-corner-bottom"></li>
-                </ul>
-            </div>
-            <div data-role="footer">				
-                Developed by Rebrov Andrey, Samara 2010
-            </div>
+        <div id="main">
+
         </div>
     </body>
 </html>
