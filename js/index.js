@@ -25,7 +25,7 @@ function ajax1() {
 
 function ajax2() {
     $.ajax({
-        url: "http://localhost/GooKHPIServer/public/index.php/api/datarequest/list",
+        url: "http://192.168.0.73/GooKHPIServer/public/index.php/api/datarequest/list",
         crossDomain: true,
         type: "POST",
         dataType: "json",
