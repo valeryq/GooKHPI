@@ -14,16 +14,15 @@ function btnLogin() {
 }
 
 function processLogin(response) {
-    alert(JSON.stringify(response));
     if (response) {
-        if (!response.result) {
+        if (!responseresult) {
             alert("Ошибка авторизации");
             return;
         }
         
         isAuth = true;
-        user = response;
-        alert("Your email: " + user.email);
+        user = response.user;
+        alert("Успешная авторизация! \nВаш email: " + user.email);
     }
 
 }
