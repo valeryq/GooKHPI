@@ -14,10 +14,6 @@
         <div data-role="page" id="main_page" data-theme="a">
             <div data-role="header">
                 <h1 style="text-align:left;margin-left:15px;">GooХПИ</h1>
-                <div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
-                    <a style="padding:15px;" data-rel="dialog" data-iconpos="notext" data-icon="gear" data-role="button" href="#dialog1"></a>
-                    <a style="padding:15px;" onclick="ajax2()" data-rel="dialog" data-iconpos="notext" data-icon="bars" data-role="button" href="#dialog2"></a>
-                </div>
             </div>
             <div data-role="content">
                 <ul data-role="listview" data-inset="true" data-theme="a">
@@ -28,9 +24,29 @@
                 <div id="data_test"></div>
             </div>
             <div data-role="footer">
-                Developed by Rebrov Andrey, Samara 2010
+                <h2>&copy; 2014 Валерий Захарченко</h2>
             </div>
         </div>		
+        
+        
+        <!--LOGIN PAGE-->
+        <div data-role="page" id="login_page" data-theme="a">
+            <div data-role="header">
+                <h1 style="text-align:left;margin-left:15px;">Авторизация</h1>
+            </div>
+            <div data-role="content">
+                <label for="email">Электронный адрес:</label>
+                <input type="email" name="email" id="email" data-mini="true" placeholder="Введите email" />
+                <label for="password">Пароль:</label>
+                <input type="password" name="password" id="password" data-mini="true" placeholder="Введите пароль" />
+                <input type="submit" value="Войти" onclick="btnLogin()">
+            </div>
+            <div data-role="footer">
+                <h2>&copy; 2014 Валерий Захарченко</h2>
+            </div>
+        </div>	
+        
+        
         <div data-role="page" id="twitter_page" data-theme="a">
             <div data-role="header" >
                 <h1>Simple twitter example</h1>
@@ -39,7 +55,7 @@
                 <div id="twi_list"></div>
             </div>
             <div data-role="footer">				
-                Developed by Rebrov Andrey, Samara 2010
+                <h2>&copy; 2014 Валерий Захарченко</h2>
             </div>
         </div>
         <div data-role="page" id="map_page" data-theme="a">
@@ -50,7 +66,7 @@
                 <div id="map_canvas"></div>
             </div>
             <div data-role="footer">				
-                Developed by Rebrov Andrey, Samara 2010
+                <h2>&copy; 2014 Валерий Захарченко</h2>
             </div>
         </div>
         <div data-role="page" id="about" data-theme="a">
@@ -68,7 +84,7 @@
                 </ul>
             </div>
             <div data-role="footer">				
-                Developed by Rebrov Andrey, Samara 2010
+                <h2>&copy; 2014 Валерий Захарченко</h2>
             </div>
         </div>
     </body>
