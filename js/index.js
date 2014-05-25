@@ -15,7 +15,7 @@ function btnLogin() {
 
 function processLogin(response) {
     if (response) {
-        if (!responseresult) {
+        if (!response.result) {
             alert("Ошибка авторизации");
             return;
         }
