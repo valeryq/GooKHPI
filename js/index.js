@@ -1,5 +1,5 @@
 var config = {
-    host: "localhost/GooKHPIServer/public/index.php"
+    host: "http://192.168.0.73/GooKHPIServer/public/index.php"
 };
 
 var isAuth = false;
@@ -86,7 +86,7 @@ function processGetListRequests(response) {
 function sendRequest(method, data, callback) {
     loaderShow();
     $.ajax({
-        url: "http://" + config.host + "/api/" + method,
+        url: config.host + "/api/" + method,
         crossDomain: true,
         type: "POST",
         dataType: "json",
