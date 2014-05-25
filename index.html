@@ -2,8 +2,8 @@
     <head>
         <title>GooХПИ</title>
         <meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.min.css" />
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile.min.js"></script>
@@ -17,7 +17,7 @@
             </div>
             <div data-role="content">
                 <ul data-role="listview" data-inset="true" data-theme="a">
-                    <li><a href="#twitter_page">Twitter example</a></li>
+                    <li><a href="#requests_page">Запросы</a></li>
                     <li><a href="#map_page">Map example</a></li>
                     <li><a href="#about">About</a></li>
                 </ul>
@@ -27,32 +27,91 @@
                 <h2>&copy; 2014 Валерий Захарченко</h2>
             </div>
         </div>		
-        
-        
+
+
         <!--LOGIN PAGE-->
         <div data-role="page" id="login_page" data-theme="a">
             <div data-role="header">
                 <h1 style="text-align:left;margin-left:15px;">Авторизация</h1>
             </div>
             <div data-role="content">
-                <label for="email">Электронный адрес:</label>
-                <input type="email" name="email" id="email" data-mini="true" placeholder="Введите email" />
-                <label for="password">Пароль:</label>
-                <input type="password" name="password" id="password" data-mini="true" placeholder="Введите пароль" />
-                <input type="submit" value="Войти" onclick="btnLogin()">
+                <form>
+                    <label for="email">Электронный адрес:</label>
+                    <input type="email" name="email" id="email" data-mini="true" placeholder="Введите email" />
+                    <label for="password">Пароль:</label>
+                    <input type="password" name="password" id="password" data-mini="true" placeholder="Введите пароль" />
+                    <input type="submit" value="Войти" onclick="btnLogin()">
+                </form>
             </div>
             <div data-role="footer">
                 <h2>&copy; 2014 Валерий Захарченко</h2>
             </div>
         </div>	
-        
-        
-        <div data-role="page" id="twitter_page" data-theme="a">
+
+
+        <div data-role="page" id="requests_page" data-theme="a">
             <div data-role="header" >
-                <h1>Simple twitter example</h1>
+                <h1>Запросы</h1>
             </div>
             <div data-role="content" >	
-                <div id="twi_list"></div>
+                <ul data-role="listview">
+                    <li>
+                        <a href="">
+                            <h3>Samsung galaxy ace 2</h3>
+                            <p><b>Завершен:</b> нет.</p>
+                            <p class="ui-li-aside">Последнее обновление: April 9, 2013</p>
+                            <div class="ui-li-count">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <h3>Samsung galaxy ace 2</h3>
+                            <p><b>Завершен:</b> нет.</p>
+                            <p class="ui-li-aside">Последнее обновление: April 9, 2013</p>
+                            <div class="ui-li-count">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <h3>Samsung galaxy ace 2</h3>
+                            <p><b>Завершен:</b> нет.</p>
+                            <p class="ui-li-aside">Последнее обновление: April 9, 2013</p>
+                            <div class="ui-li-count">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <h3>Samsung galaxy ace 2</h3>
+                            <p><b>Завершен:</b> нет.</p>
+                            <p class="ui-li-aside">Последнее обновление: April 9, 2013</p>
+                            <div class="ui-li-count">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <h3>Samsung galaxy ace 2</h3>
+                            <p><b>Завершен:</b> нет.</p>
+                            <p class="ui-li-aside">Последнее обновление: April 9, 2013</p>
+                            <div class="ui-li-count">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <h3>Samsung galaxy ace 2</h3>
+                            <p><b>Завершен:</b> нет.</p>
+                            <p class="ui-li-aside">Последнее обновление: April 9, 2013</p>
+                            <div class="ui-li-count">0</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <h3>Samsung galaxy ace 2</h3>
+                            <p><b>Завершен:</b> нет.</p>
+                            <p class="ui-li-aside">Последнее обновление: April 9, 2013</p>
+                            <div class="ui-li-count">0</div>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div data-role="footer">				
                 <h2>&copy; 2014 Валерий Захарченко</h2>

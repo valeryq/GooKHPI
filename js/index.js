@@ -1,9 +1,19 @@
+var config = {
+    host: "localhost/GooKHPIServer/public/index.php"
+}
 var isAuth = false;
 var user = {};
 
 $(document).ready(function() {
-    window.location.href = "#login_page";
+    setInterval(checkIsAuth, 30000);
 });
+
+
+function checkIsAuth() {
+    if (!isAuth) {
+        window.location.href = "#login_page";
+    }
+}
 
 
 function btnLogin() {
@@ -23,6 +33,7 @@ function processLogin(response) {
         isAuth = true;
         user = response.user;
         alert("Успешная авторизация! \nВаш email: " + user.email);
+        window.location.href = "#main_page";
     }
 
 }
@@ -39,7 +50,7 @@ function processLogin(response) {
 function sendRequest(method, data, callback) {
     loaderShow();
     $.ajax({
-        url: "http://192.168.0.73/GooKHPIServer/public/index.php/api/" + method,
+        url: "http://"+config.host+"/api/" + method,
         crossDomain: true,
         type: "POST",
         dataType: "json",
@@ -47,6 +58,13 @@ function sendRequest(method, data, callback) {
         contentType: "application/json",
         success: (function(response) {
             loaderClose();
+            
+            if (!response.result && response.message == "Auth error") {
+                isAuth = false;
+                user = {};
+                checkIsAuth();
+            }
+            
             callback(response);
         }),
         error: (function(xhr, status, err) {
