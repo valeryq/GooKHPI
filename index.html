@@ -13,7 +13,7 @@
     <body>
         <div data-role="page" id="main_page" data-theme="a">
             <div data-role="header">
-                <h1 style="font-size: 30px;">GooХПИ</h1>
+                <h1 style="font-size: 24px;">GooХПИ</h1>
             </div>
             <div data-role="content">
                 <ul data-role="listview" data-inset="true" data-theme="a">
@@ -48,7 +48,7 @@
             </div>
         </div>	
 
-
+        <!--REQUEST LIST PAGE-->
         <div data-role="page" id="requests_page" data-theme="a">
             <div data-role="header" data-position="fixed" >
                 <h1>Запросы</h1>
@@ -65,6 +65,26 @@
                 <h2>&copy; 2014 Валерий Захарченко</h2>
             </div>
         </div>
+        
+        
+        <!--SHOW REQUEST PAGE-->
+        <div data-role="page" id="show_request_page" data-theme="a">
+            <div data-role="header" data-position="fixed" >
+                <h1>Запросы</h1>
+                <div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
+                    <a style="padding: 15px;" data-rel="dialog" data-iconpos="notext" data-icon="plus" data-role="button"></a>
+                    <a style="padding: 15px;" title="Обновить" onclick="showRequest()" data-iconpos="notext" data-icon="refresh" data-role="button"></a>
+                </div>
+            </div>
+            <div data-role="content" >	
+                <div id="request_content">
+                </div>
+            </div>
+            <div data-role="footer">				
+                <h2>&copy; 2014 Валерий Захарченко</h2>
+            </div>
+        </div>
+        
         <div data-role="page" id="map_page" data-theme="a">
             <div data-role="header" >
                 <h1>Map example</h1>

@@ -7,7 +7,8 @@ var isAuth = false;
 var user = {};
 
 $(document).ready(function() {
-    $(document).on('pageinit', '#requests_page', getListRequests);
+    $(document).on('pagebeforeshow', '#requests_page', getListRequests);
+    $(document).on('pagebeforeshow', '#show_request_page', showRequest);
 });
 
 
@@ -38,6 +39,12 @@ function getListRequests() {
     sendRequest("datarequest/list", null, processGetListRequests);
 }
 
+function showRequest() {
+    sendRequest("datarequest/show", {id: localStorage.id}, processShowRequest);
+}
+
+
+
 
 /***************************************
  *                                     *
@@ -65,7 +72,7 @@ function processGetListRequests(response) {
     var html = "";
     for (var key in response) {
         var isFinished = parseInt(response[key].is_finished) ? "Да" : "Нет";
-        html += "<li>\n\
+        html += "<li onclick=\"changePage('show_request_page', this)\" id=\""+response[key].id+"\">\n\
                     <a href=\"\">\n\
                     <h3 id=\"title\">"+response[key].request+"</h3>\n\
                     <p><b>Завершен:</b> <span id=\"isFinished\">"+isFinished+".</span></p>\n\
@@ -74,6 +81,52 @@ function processGetListRequests(response) {
     }
     $("#requestList").html(html);
     $("#requestList").listview("refresh");
+}
+
+function processShowRequest(response) {
+    if (!response.result) {
+        alert("Ошибка запроса!");
+        return;
+    }
+    
+    var dataRequest = response.datarequest;
+    var isFinished = parseFloat(dataRequest.is_finished) ? "Да" : "Нет";
+    var requestContent = "<small><div><b>Идентификатор</b>: "+dataRequest.id+"</div>\n\
+                          <div><b>Запрос</b>: "+dataRequest.request+"</div>\n\
+                          <div><b>Завершен</b>: "+isFinished+"</div><small><br />";
+    
+    var htmlSet = "";
+    
+    for (var key in response.dataresponses) {
+        var dataResponse = response.dataresponses[key];
+        
+        var image = "";
+        if (dataResponse.image) {
+            image = "<img style='width:100%;' src='"+dataResponse.image+"' />";
+        }
+        var publishedDate = new Date(dataResponse.published_date);
+        var createdAt = new Date(dataResponse.created_at);
+        htmlSet += "\
+            <div id='coll_"+key+"' data-role='collapsible' data-theme='a'>\n\
+                <h1>"+dataResponse.title+"</h1>\n\
+                <p><h2>"+dataResponse.title+"</h2></p>\n\
+                "+image+"\n\
+                <p>"+dataResponse.content_news+"...</p>\n\
+                <p><div><b>Опубликовано:</b> " + dataResponse.publisher + "</div>\n\
+                <div><b>Дата публикации:</b> " + publishedDate.toLocaleString() + "</div>\n\
+                <div><b>Ссылка</b> : <a href='#' onclick='window.open(\"" + dataResponse.url + "\", \"_system\")'>Перейти</a></div>\n\
+                </p>\n\
+                <p><b>Результат получен</b>: " + createdAt.toLocaleString() + "</p>\n\
+            </div>";
+    }
+    
+    if (htmlSet) {
+        htmlSet = "<div data-role=\"collapsible-set\" data-content-theme=\"b\" id=\"responses_set\">" + htmlSet + "</div>";
+    }
+    console.log(htmlSet);
+    
+    $("#request_content").html(requestContent + htmlSet).trigger( "create" );
+    $("#responses_set").collapsibleset('refresh');
 }
 
 
@@ -92,12 +145,12 @@ function sendRequest(method, data, callback) {
         crossDomain: true,
         type: "POST",
         dataType: "json",
-        data: data,
+        data: JSON.stringify(data),
         contentType: "application/json",
         success: (function(response) {
             loaderClose();
 
-            if (!response.result && response.message == "Auth error") {
+            if (!response.result && response.message == "Execute auth please") {
                 isAuth = false;
                 user = {};
                 checkIsAuth();
@@ -131,4 +184,10 @@ function checkIsAuth() {
     if (!isAuth) {
         window.location.href = "#login_page";
     }
+}
+
+
+function changePage(page, elem) {
+    localStorage.id= $(elem).attr('id');
+    $.mobile.changePage("#"+page);
 }
