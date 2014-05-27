@@ -123,7 +123,6 @@ function processShowRequest(response) {
     if (htmlSet) {
         htmlSet = "<div data-role=\"collapsible-set\" data-content-theme=\"b\" id=\"responses_set\">" + htmlSet + "</div>";
     }
-    console.log(htmlSet);
     
     $("#request_content").html(requestContent + htmlSet).trigger( "create" );
     $("#responses_set").collapsibleset('refresh');
@@ -155,9 +154,9 @@ function sendRequest(method, data, callback) {
                 user = {};
                 checkIsAuth();
                 return;
+            } else {
+                callback(response);
             }
-
-            callback(response);
         }),
         error: (function(xhr, status, err) {
             loaderClose();
