@@ -114,7 +114,7 @@ function processShowRequest(response) {
                 <p>"+dataResponse.content_news+"...</p>\n\
                 <p><div><b>Опубликовано:</b> " + dataResponse.publisher + "</div>\n\
                 <div><b>Дата публикации:</b> " + publishedDate.toLocaleString() + "</div>\n\
-                <div><b>Ссылка</b> : <a href='#' onclick=\"window.open('"+ dataResponse.url +"', '_blank');\">Перейти</a></div>\n\
+                <div><b>Ссылка</b> : <a href='#' onclick=\"window.open('"+ dataResponse.url +"', '_blank', 'location=yes');\">Перейти</a></div>\n\
                 </p>\n\
                 <p><b>Результат получен</b>: " + createdAt.toLocaleString() + "</p>\n\
             </div>";
