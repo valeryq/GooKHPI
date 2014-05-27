@@ -21,10 +21,10 @@ $(document).ready(function() {
  */
 
 function btnLogin() {
-    sendRequest("user/signin", JSON.stringify({
+    sendRequest("user/signin", {
         email: $('#email').val(),
         password: $('#password').val()
-    }), processLogin);
+    }, processLogin);
 }
 
 
@@ -154,6 +154,7 @@ function sendRequest(method, data, callback) {
                 isAuth = false;
                 user = {};
                 checkIsAuth();
+                return;
             }
 
             callback(response);
