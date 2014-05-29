@@ -9,6 +9,7 @@ var user = {};
 $(document).ready(function() {
     $(document).on('pagebeforeshow', '#requests_page', getListRequests);
     $(document).on('pagebeforeshow', '#show_request_page', showRequest);
+    $(document).on('pagebeforeshow', '#responses_page', getListResponses);
 });
 
 
@@ -27,6 +28,21 @@ function btnLogin() {
     }, processLogin);
 }
 
+function btnCreateRequest() {
+    sendRequest("datarequest/create", {
+        request: $("#request").val()
+    }, processCreateRequest);
+}
+
+function btnDeleteRequest() {
+    if (confirm("Вы уверенны что хотите удалить запрос?")) {
+        sendRequest("datarequest/delete", {
+        id: localStorage.id
+        }, processDeleteRequest);
+    }
+}
+
+
 
 /***************************************
  *                                     *
@@ -37,6 +53,10 @@ function btnLogin() {
 
 function getListRequests() {
     sendRequest("datarequest/list", null, processGetListRequests);
+}
+
+function getListResponses() {
+    sendRequest("dataresponse/list", null, processGetListResponses);
 }
 
 function showRequest() {
@@ -121,13 +141,63 @@ function processShowRequest(response) {
     }
     
     if (htmlSet) {
-        htmlSet = "<div data-role=\"collapsible-set\" data-content-theme=\"b\" id=\"responses_set\">" + htmlSet + "</div>";
+        htmlSet = "<div data-role=\"collapsible-set\" data-inset=\"false\" data-content-theme=\"b\" id=\"responses_set\">" + htmlSet + "</div>";
     }
     
     $("#request_content").html(requestContent + htmlSet).trigger( "create" );
     $("#responses_set").collapsibleset('refresh');
 }
 
+
+function processCreateRequest(response) {
+    if (response.result) {
+        alert("Запрос успешно создан");
+        history.back();
+    } else {
+        alert("Ошибка! \nСообщение: "+response.message);
+    }
+}
+
+function processDeleteRequest(response) {
+    if (response.result) {
+        alert("Запрос успешно удалён");
+        history.back();
+    } else {
+        alert("Ошибка! \nСообщение: "+response.message);
+    }
+}
+
+function processGetListResponses(response) {
+    console.log(response);
+    var htmlSet = "<div>Всего <b>" + response.length + "</b> результатов!</div><br />";
+    
+    for (var key in response) {
+        var dataResponse = response[key];
+        
+        var image = "";
+        if (dataResponse.image) {
+            image = "<img style='width:100%;' src='"+dataResponse.image+"' />";
+        }
+        var publishedDate = new Date(dataResponse.published_date);
+        var createdAt = new Date(dataResponse.created_at);
+        htmlSet += "\
+            <div id='coll_"+key+"' data-role='collapsible' data-theme='a'>\n\
+                <h1>"+dataResponse.title+"</h1>\n\
+                <p><h2>"+dataResponse.title+"</h2></p>\n\
+                "+image+"\n\
+                <p>"+dataResponse.content_news+"...</p>\n\
+                <p><div><b>Опубликовано:</b> " + dataResponse.publisher + "</div>\n\
+                <div><b>Дата публикации:</b> " + publishedDate.toLocaleString() + "</div>\n\
+                <div><b>Ссылка</b> : <a href='#' onclick=\"window.open('"+ dataResponse.url +"', '_blank', 'location=yes');\">Перейти</a></div>\n\
+                </p>\n\
+                <p><b>Результат получен</b>: " + createdAt.toLocaleString() + "</p>\n\
+            </div>";
+    }
+    
+    $("#responsesList").html(htmlSet).trigger( "create" );
+    $("#responsesList").collapsibleset('refresh');
+    
+}
 
 
 
